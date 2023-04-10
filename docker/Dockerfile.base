@@ -1,3 +1,5 @@
+# syntax = docker/dockerfile:1.4.0
+
 FROM nvcr.io/nvidia/pytorch:22.12-py3
 LABEL org.opencontainers.image.authors="soulteary@gmail.com"
 
@@ -7,7 +9,7 @@ RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && 
 
 WORKDIR /app
 
-RUN cat > /get-models.py <<EOF
+RUN <<EOF cat>> /get-models.py 
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 AutoModelForSeq2SeqLM.from_pretrained('Helsinki-NLP/opus-mt-zh-en')
 AutoTokenizer.from_pretrained('Helsinki-NLP/opus-mt-zh-en')
